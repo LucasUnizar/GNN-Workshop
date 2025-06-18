@@ -12,8 +12,7 @@ This repo explores and benchmarks **graph-based deep learning architectures** fo
 |--------------|------------------------|-------------|
 | `gnn`        | Hyperbolic / Parabolic | Uses a GNN architecture (MPNN) to simulate time-dependent systems |
 | `poisson`    | Elliptic               | Solves stationary toy PDE problems like the Poisson equation |
-| `laplace`    | Elliptic               | Similar to Poisson, used for Laplace toy PDEs |
-| `meshgraph`  | Dynamic (Collision)    | Uses MeshGraphNets to simulate realistic plate collision systems |
+| `meshgraph`  | Dynamic (Collision)    | Uses MeshGraphNets to simulate elliptic plate collision systems |
 
 ---
 
