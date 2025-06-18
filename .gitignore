@@ -1,0 +1,6 @@
+/wandb
+/runs
+/mssg_hops_data
+/config.yaml
+/config_elliptic.yaml
+sweep.py
