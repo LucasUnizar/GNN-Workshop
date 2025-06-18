@@ -108,15 +108,6 @@ python main.py \
 
 ## 🧠 Models
 
-### GNN (MPNN)
-Used for **hyperbolic and parabolic** systems like wave or heat equations. This model learns temporal evolution via message passing.
-
-### Poisson / Laplace
-Targets **elliptic PDEs** such as:
-- Poisson equation: Δu = f
-- Laplace equation: Δu = 0
-
-Both are modeled with the same GNN backbone, applied to stationary problems.
 
 ### MeshGraphNet
 Designed for **realistic dynamic simulations**, like elastic plate collisions. Uses spatial message passing on mesh graphs.
@@ -139,11 +130,5 @@ All metrics, checkpoints, and plots are logged under the given `--project` and `
 
 ## 📈 Example Results
 
-| Model | Task | Metric (RMSE) | Notes |
-|-------|------|---------------|-------|
-| GNN   | Hyperbolic system | 0.012 | 3-step rollout |
-| MeshGraphNet | Plate Collision | 0.038 | Generalizes to unseen initial conditions |
-| Poisson GNN | Poisson equation | ~0.01 | Elliptic PDE solution |
 
----
 
