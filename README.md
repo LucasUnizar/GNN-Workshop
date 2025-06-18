@@ -20,12 +20,12 @@ This repo explores and benchmarks **graph-based deep learning architectures** fo
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/meshgnn-pde.git
-cd meshgnn-pde
+git clone https://github.com/LucasUnizar/MPNN-PDE
+cd MPNN-PDE
 
 # Create environment
-conda create -n meshgnn python=3.10
-conda activate meshgnn
+conda create -n MPNN python=3.11
+conda activate MPNN
 
 # Install dependencies
 pip install -r requirements.txt
