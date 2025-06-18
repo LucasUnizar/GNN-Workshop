@@ -1,4 +1,3 @@
-```markdown
 # 🧠 MeshGNN-PDE: Solving PDEs with Message Passing Neural Networks and MeshGraphNets
 
 This repository integrates **Message Passing Neural Networks (MPNNs)** and **MeshGraphNets** to solve a variety of Partial Differential Equations (PDEs), ranging from toy elliptic problems to realistic dynamics like plate collisions.
