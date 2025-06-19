@@ -1,7 +1,7 @@
 # 🧠 MPNN-PDE: Optimal reach is all you need!
 
 [![Project page](https://img.shields.io/badge/-Project%20page-green)](https://eniachair.unizar.es/)
-[![Linkedln](https://img.shields.io/badge/-Linkdln%20Lucas-blue)](https://www.linkedin.com/in/lucas-tesan-ingbiozar/)
+[![Linkedln](https://img.shields.io/badge/-Linkdln%20Mikel-blue)](https://www.linkedin.com/in/mikel-m-iparraguirre-80196b13b/)
 [![Linkedln](https://img.shields.io/badge/-Linkdln%20Lucas-blue)](https://www.linkedin.com/in/lucas-tesan-ingbiozar/)
 [![Paper](https://img.shields.io/badge/-Paper-red)]()
 
