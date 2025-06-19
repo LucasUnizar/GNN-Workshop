@@ -12,7 +12,7 @@ This repository integrates **Message Passing Neural Networks (MPNNs)** and **Mes
 
 ## 🚀 Project Overview
 
-This repo explores and benchmarks **graph-based deep learning architectures** for solving PDE systems:
+This repo explores **graph-based deep learning architectures** for solving PDE systems:
 
 | Model        | Type of PDE Solved     | Description |
 |--------------|------------------------|-------------|
