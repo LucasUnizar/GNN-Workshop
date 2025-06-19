@@ -3,7 +3,7 @@
 [![Project page](https://img.shields.io/badge/-Project%20page-green)](https://eniachair.unizar.es/)
 [![Linkedln](https://img.shields.io/badge/-Linkdln%20Mikel-blue)](https://www.linkedin.com/in/mikel-m-iparraguirre-80196b13b/)
 [![Linkedln](https://img.shields.io/badge/-Linkdln%20Lucas-blue)](https://www.linkedin.com/in/lucas-tesan-ingbiozar/)
-[![Preprint](https://img.shields.io/badge/-Paper-red)]()
+[![Preprint](https://img.shields.io/badge/-Preprint-red)]()
 
 
 This repository integrates **Message Passing Neural Networks (MPNNs)** and **MeshGraphNets** to solve a variety of Partial Differential Equations (PDEs), ranging from toy hyperbolic problems to realistic dynamics like elliptic plate collisions.
