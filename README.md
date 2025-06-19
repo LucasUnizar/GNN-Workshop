@@ -1,5 +1,11 @@
 # 🧠 MPNN-PDE: Optimal reach is all you need!
 
+[![Project page](https://img.shields.io/badge/-Project%20page-green)](https://eniachair.unizar.es/)
+[![Linkedln](https://img.shields.io/badge/-Linkdln%20Lucas-blue)](https://www.linkedin.com/in/lucas-tesan-ingbiozar/)
+[![Linkedln](https://img.shields.io/badge/-Linkdln%20Lucas-blue)](https://www.linkedin.com/in/lucas-tesan-ingbiozar/)
+[![Paper](https://img.shields.io/badge/-Paper-red)]()
+
+
 This repository integrates **Message Passing Neural Networks (MPNNs)** and **MeshGraphNets** to solve a variety of Partial Differential Equations (PDEs), ranging from toy hyperbolic problems to realistic dynamics like elliptic plate collisions.
 
 ---
