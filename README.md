@@ -1,4 +1,4 @@
-# 🧠 MPNN-PDE: Solving PDEs with Message Passing Neural Networks and MeshGraphNets
+# 🧠 MPNN-PDE: Optimal reach is all you need!
 
 This repository integrates **Message Passing Neural Networks (MPNNs)** and **MeshGraphNets** to solve a variety of Partial Differential Equations (PDEs), ranging from toy hyperbolic problems to realistic dynamics like elliptic plate collisions.
 
