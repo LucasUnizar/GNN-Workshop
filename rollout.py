@@ -19,10 +19,10 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='MeshGraph Simulation')
-    parser.add_argument('--pretrain_path', type=str, default=r"outputs\checkpoints\poisson_high\30pass\models\topk1.pth")
-    parser.add_argument('--dataset_dir', type=str, default='data/Elliptic_HighRes/dataset', help='Directory containing dataset')
+    parser.add_argument('--pretrain_path', type=str, default=r"outputs\checkpoints\waves-low\6pass\models\topk1.pth")
+    parser.add_argument('--dataset_dir', type=str, default=r'data\Waves_LowRes\dataset', help='Directory containing dataset')
     parser.add_argument('--split', type=str, default="test",  help='Dataset split to load simulation')
-    parser.add_argument('--model', type=str, default="poisson", help='Unique identifier for the training run')
+    parser.add_argument('--model', type=str, default="gnn", help='Unique identifier for the training run')
     parser.add_argument('--sim', type=int, default=0, help='Simulation index to make rollout')
     parser.add_argument('--mssg_flag', action="store_true", help="Flag to use message passing in the model")
     parser.add_argument('--full_rollout', action="store_false", help="Flag to plot the worst results during validation")
