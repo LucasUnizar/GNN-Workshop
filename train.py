@@ -5,7 +5,6 @@ from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.callbacks import LearningRateMonitor
 
 from src.model.model import SimulatorGNN
-from src.model.model_meshgraph import SimulatorMeshGraph
 from src.model.callbacks import ModelSaveTopK
 
 import wandb
@@ -25,11 +24,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='MeshGraph Simulation')
 
     parser.add_argument('--batch_size', type=int, default=64, help='Number of samples per training batch')
-    parser.add_argument('--epochs', type=int, default=1, help='Number of training epochs')
-    parser.add_argument('--mp_steps', type=int, default=1, help='Number of message-passing steps in the GNN')
+    parser.add_argument('--epochs', type=int, default=500, help='Number of training epochs')
+    parser.add_argument('--mp_steps', type=int, default=6, help='Number of message-passing steps in the GNN')
     parser.add_argument('--layers', type=int, default=2, help='Number of layers in the model')
-    parser.add_argument('--hidden', type=int, default=10, help='Number of hidden units per layer')
-    parser.add_argument('--eval_freq', type=int, default=1, help='Frequency (in epochs) of model evaluation')
+    parser.add_argument('--hidden', type=int, default=16, help='Number of hidden units per layer')
+    parser.add_argument('--eval_freq', type=int, default=25, help='Frequency (in epochs) of model evaluation')
     parser.add_argument('--lr', type=float, default=1e-3, help='Learning rate for the optimizer')
     parser.add_argument('--noise', type=float, default=0.1, help='Standard relative deviation of noise added to the input data')
     parser.add_argument('--seed', type=int, default=1, help='Seed for random number generators')
@@ -37,12 +36,12 @@ if __name__ == '__main__':
 
 
     parser.add_argument("--shared_mp", action="store_false", help="Use shared weights for message-passing layers in the GNN")
-    parser.add_argument('--dataset_dir', type=str, default='data/Hyperbolic_LowRes/dataset', help='Path to the directory containing the dataset')
-    parser.add_argument('--run_name', type=str, default="Tester", help='Unique identifier for the training run')
+    parser.add_argument('--dataset_dir', type=str, default='data/Jaca-SummerSchool25_waves/dataset', help='Path to the directory containing the dataset')
+    parser.add_argument('--run_name', type=str, default="test", help='Unique identifier for the training run')
     parser.add_argument('--model', type=str, default="gnn", help='Unique identifier for the training run')
     parser.add_argument('--plots_flag', action="store_false", help="Enable plotting of the results")
     parser.add_argument('--plot_worst', action="store_true", help="Flag to plot the worst results during validation")
-    parser.add_argument('--project', type=str, default="tester", help='Project name for organizing runs')
+    parser.add_argument('--project', type=str, default="Jaca-SummerSchool25-GNNs", help='Project name for organizing runs')
  
     args = parser.parse_args()
 
@@ -62,11 +61,6 @@ if __name__ == '__main__':
         simulator = SimulatorGNN(args, mp_steps=args.mp_steps, input_size=2, output_size=1, hidden=args.hidden,
                                 layers=args.layers, shared_mp=args.shared_mp, epochs=args.epochs, lr=args.lr, device=device, noise=args.noise)
         monitor='valid_n_step_rollout_rmse'
-        
-    elif args.model =='meshgraph':
-        simulator = SimulatorMeshGraph(args, mp_steps=args.mp_steps, input_size=7, edge_input_size=4, output_size=4, hidden=args.hidden,
-                                layers=args.layers, shared_mp=args.shared_mp, epochs=args.epochs, lr=args.lr, device=device, noise=args.noise)
-        monitor='valid_n_step_rollout_pos_rmse'
 
     # Callbacks
     chck_path, name = set_run_directory(args)
@@ -85,7 +79,6 @@ if __name__ == '__main__':
                             deterministic=True,
                             check_val_every_n_epoch=args.eval_freq,
                             enable_checkpointing=False,
-                            
                          )
     # fit model
     trainer.fit(simulator, datamodule=data_module)

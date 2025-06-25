@@ -1,0 +1,19 @@
+{
+    "batch_size": 32,
+    "epochs": 500,
+    "mp_steps": 12,
+    "layers": 2,
+    "hidden": 32,
+    "eval_freq": 25,
+    "lr": 0.001,
+    "noise": 0.1,
+    "seed": 1,
+    "ratio": 1.0,
+    "shared_mp": true,
+    "dataset_dir": "data/Jaca-SummerSchool25_Elliptic_HighRes/dataset",
+    "run_name": "test",
+    "model": "poisson",
+    "plots_flag": true,
+    "plot_worst": false,
+    "project": "Jaca-SummerSchool25-GNNs"
+}
