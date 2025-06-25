@@ -58,7 +58,7 @@ class MPNN_GraphDataset(Dataset):
             self.data = []
             for file in self.data_files:
                 file_path = os.path.join(self.data_dir, file)
-                datalist = torch.load(file_path)  # Load as DataList
+                datalist = torch.load(file_path, weights_only=False)  # Load as DataList
                 for data in datalist:
                     if hasattr(data, 'u'):
                         data.num_nodes = data.u.shape[0]
@@ -70,7 +70,7 @@ class MPNN_GraphDataset(Dataset):
             self.data = []
             for file in self.data_files:
                 file_path = os.path.join(self.data_dir, file)
-                datalist = torch.load(file_path)  # Load as DataList
+                datalist = torch.load(file_path, weights_only=False)  # Load as DataList
                 for data in datalist:
                     if hasattr(data, 'u'):
                         data.num_nodes = data.u.shape[0]
@@ -97,7 +97,7 @@ class Poisson_GraphDataset(Dataset):
             self.data = []
             for file in self.data_files:
                 file_path = os.path.join(self.data_dir, file)
-                data = torch.load(file_path)  # Load as DataList
+                data = torch.load(file_path, weights_only=False)  # Load as DataList
                 data.num_nodes = data.u.shape[0]
                 datalist = [data]
                 self.data.append(datalist)  # Append each data to the main list
@@ -105,7 +105,7 @@ class Poisson_GraphDataset(Dataset):
             self.data = []
             for file in self.data_files:
                 file_path = os.path.join(self.data_dir, file)
-                data = torch.load(file_path)  # Load as DataList
+                data = torch.load(file_path, weights_only=False)  # Load as DataList
                 data.num_nodes = data.u.shape[0]
                 self.data.append(data)  # Append each data to the main list
 
