@@ -3,7 +3,7 @@
 This project provides a training and evaluation pipeline for a Graph Neural Network (GNN) tailored for mesh-based simulations using PyTorch Lightning. Configuration is handled via command-line arguments for flexibility and reproducibility.
 
 <div align="center">
-<img src="/material/gnn.png" width="350">
+<img src="/material/gnn.png" width="250">
 </div>
 
 ---
