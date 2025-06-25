@@ -16,7 +16,7 @@ class MGN_GraphDataset(Dataset):
             self.data = []
             for file in self.data_files:
                 file_path = os.path.join(self.data_dir, file)
-                datalist = torch.load(file_path)  # Load as DataList
+                datalist = torch.load(file_path, weights_only=False)  # Load as DataList
                 for data in datalist:
                     data.face = torch.transpose(data.face[:, 1:], 1, 0)
                     data.x = torch.cat([data.x[:, :3], data.x[:, -1:]], dim=-1).float()
@@ -29,7 +29,7 @@ class MGN_GraphDataset(Dataset):
             self.data = []
             for file in self.data_files:
                 file_path = os.path.join(self.data_dir, file)
-                datalist = torch.load(file_path)  # Load as DataList
+                datalist = torch.load(file_path, weights_only=False)  # Load as DataList
                 for data in datalist:
                     data.face = torch.transpose(data.face[:, 1:], 1, 0)
                     data.x = torch.cat([data.x[:, :3], data.x[:, -1:]], dim=-1).float()
