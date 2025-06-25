@@ -1,4 +1,4 @@
-# 🧠 MeshGraph Simulation Workshop
+# Material for MeshGraph Simulation Workshop
 
 This project provides a training and evaluation pipeline for a Graph Neural Network (GNN) tailored for mesh-based simulations using PyTorch Lightning. Configuration is handled via command-line arguments for flexibility and reproducibility.
 
