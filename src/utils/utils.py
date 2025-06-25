@@ -14,6 +14,15 @@ class NodeTypeDP(enum.IntEnum):
     WALL_BOUNDARY = 1
     ACTUATOR = 2
 
+def set_constants(args):
+    args.ratio = 1.0
+    args.shared_mp = False
+    args.noise = 0.0
+
+    # Set the run name based on the model and parameters
+    args.plots_flag = True
+    args.plot_worst = False
+    return args
 
 def transform_data(data, z_net_list, z_gt_list, data_out, edge_index=[], edge_contact=[], faces=[], node_type=[],
                    export_path="mssg_hops_data"):

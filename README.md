@@ -51,21 +51,11 @@ python train.py --dataset_dir data/Jaca-SummerSchool25_waves/dataset --model gnn
 | `--hidden` | `int` | `16` | Number of hidden units per GNN layer |
 | `--eval_freq` | `int` | `25` | Frequency (in epochs) for model evaluation |
 | `--lr` | `float` | `1e-3` | Learning rate for the optimizer |
-| `--noise` | `float` | `0.1` | Standard relative deviation of noise added to input data |
 | `--seed` | `int` | `1` | Random seed for reproducibility |
-| `--ratio` | `float` | `1.0` | Ratio controlling data noise in `GraphDataModule` |
-| `--shared_mp` | `flag` | Enabled by default | Use shared weights for message-passing layers (disabled if flag is included) |
 | `--dataset_dir` | `str` | `data/Jaca-SummerSchool25_waves/dataset` | Path to dataset directory |
 | `--run_name` | `str` | `"test"` | Unique name for the training run |
 | `--model` | `str` | `"gnn"` | Model type (`gnn` or `poisson`) |
-| `--plots_flag` | `flag` | Enabled by default | Enable plotting of results (disabled if flag is included) |
-| `--plot_worst` | `flag` | `False` | If set, plots the worst validation examples |
 | `--project` | `str` | `"Jaca-SummerSchool25-GNNs"` | Project name for wandb logging |
-
-> ⚠️ Boolean flags work as toggles. For example, to **disable** `--shared_mp`, simply include the flag in your command:
-> ```bash
-> --shared_mp
-> ```
 
 ---
 
