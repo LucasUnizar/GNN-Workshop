@@ -3,6 +3,7 @@ torchvision
 torchaudio
 pytorch-lightning
 numpy
+torch_geometric
 matplotlib
 scipy
 tqdm
