@@ -1,140 +1,103 @@
-# Message Passing Neural Networks as PDE solvers
+# 🧠 MeshGraph Simulation Workshop
 
-[![Project page](https://img.shields.io/badge/-Project%20page-green)](https://eniachair.unizar.es/)
-[![Linkedln](https://img.shields.io/badge/-Linkdln%20Mikel-blue)](https://www.linkedin.com/in/mikel-m-iparraguirre-80196b13b/)
-[![Linkedln](https://img.shields.io/badge/-Linkdln%20Lucas-blue)](https://www.linkedin.com/in/lucas-tesan-ingbiozar/)
-[![Preprint](https://img.shields.io/badge/-Preprint-red)]()
-
-
-This repository integrates **Message Passing Neural Networks (MPNNs)** and **MeshGraphNets** to solve a variety of Partial Differential Equations (PDEs), ranging from toy hyperbolic problems to realistic dynamics like elliptic plate collisions.
+This project provides a training and evaluation pipeline for a Graph Neural Network (GNN) tailored for mesh-based simulations using PyTorch Lightning. Configuration is handled via command-line arguments for flexibility and reproducibility.
 
 ---
 
-## 🚀 Project Overview
+## 🚀 Getting Started
 
-This repo explores **graph-based deep learning architectures** for solving PDE systems:
+### Prerequisites
 
-| Model        | Type of PDE Solved     | Description |
-|--------------|------------------------|-------------|
-| `gnn`        | Hyperbolic / Parabolic | Uses a GNN architecture (MPNN) to simulate time-dependent systems |
-| `poisson`    | Elliptic               | Solves stationary toy PDE problems like the Poisson equation |
-| `meshgraph`  | Dynamic (Collision)    | Uses MeshGraphNets to simulate elliptic plate collision systems |
-
----
-
-## 🛠️ Installation
+Make sure you have Python 3.8+ and the following Python packages installed:
 
 ```bash
-# Clone the repo
-git clone https://github.com/LucasUnizar/MPNN-PDE
-cd MPNN-PDE
-
-# Create environment
-conda create -n MPNN python=3.11
-conda activate MPNN
-
-# Install dependencies
-pip install -r requirements.txt
+pip install torch pytorch-lightning wandb matplotlib
 ```
 
 ---
 
-## 📂 Project Structure
+## 📦 Running the Training Script
+
+You can start the Poisson problem training by running:
 
 ```bash
-.
-├── src/
-│   ├── model/
-│   │   ├── model.py              # MPNN-based model
-│   │   ├── model_meshgraph.py    # MeshGraphNet model
-│   ├── dataloader/datamodule.py  # Data handling
-│   ├── callbacks.py              # Custom callbacks
-│   └── utils/utils.py            # Utility functions
-├── data/                         # Datasets (default path)
-├── main.py                       # Entry point
-└── README.md
+python train.py --dataset_dir data/Jaca-SummerSchool25_Elliptic_HighRes/dataset --model poisson 
+```
+You can start also the Hyperbolic problem training by running:
+
+```bash
+python train.py --dataset_dir data/Jaca-SummerSchool25_waves/dataset --model gnn
 ```
 
 ---
 
-## 🧪 Running Experiments
-
-### 🔹 MPNN for Hyperbolic/Parabolic PDEs
-
-```bash
-python main.py \
-  --model gnn \
-  --dataset_dir data/Hyperbolic_LowRes/dataset \
-  --run_name hyperbolic_run
-```
-
-### 🔹 Poisson Solver (Elliptic PDE)
-
-```bash
-python main.py \
-  --model poisson \
-  --dataset_dir data/Poisson/dataset \
-  --run_name poisson_test
-```
-
-### 🔹 MeshGraphNet for Plate Collision
-
-```bash
-python main.py \
-  --model meshgraph \
-  --dataset_dir data/PlateCollision \
-  --run_name plate_sim
-```
-
----
-
-## ⚙️ Argument Reference (`argparse`)
+## ⚙️ Argument Options
 
 | Argument | Type | Default | Description |
 |----------|------|---------|-------------|
 | `--batch_size` | `int` | `64` | Number of samples per training batch |
-| `--epochs` | `int` | `1` | Number of training epochs |
-| `--mp_steps` | `int` | `1` | Message-passing steps in GNN |
-| `--layers` | `int` | `2` | Number of model layers |
-| `--hidden` | `int` | `10` | Hidden units per layer |
-| `--eval_freq` | `int` | `1` | Evaluation frequency (in epochs) |
-| `--lr` | `float` | `1e-3` | Learning rate |
-| `--noise` | `float` | `0.1` | Relative noise std added to inputs |
-| `--seed` | `int` | `1` | Random seed |
-| `--ratio` | `float` | `1.0` | Data subsampling or additional control param |
-| `--shared_mp` | `flag` | Enabled | Use shared weights for message-passing layers |
-| `--dataset_dir` | `str` | `'data/Hyperbolic_LowRes/dataset'` | Path to dataset |
-| `--run_name` | `str` | `"Tester"` | Unique run identifier |
-| `--model` | `str` | `"gnn"` | Choose from: `gnn`, `poisson`, `meshgraph` |
-| `--plots_flag` | `flag` | Enabled | Enable plotting of results |
-| `--plot_worst` | `flag` | Disabled | Plot worst validation results |
-| `--project` | `str` | `"tester"` | W&B project name |
+| `--epochs` | `int` | `500` | Total number of training epochs |
+| `--mp_steps` | `int` | `6` | Number of message-passing steps in the GNN |
+| `--layers` | `int` | `2` | Number of GNN layers |
+| `--hidden` | `int` | `16` | Number of hidden units per GNN layer |
+| `--eval_freq` | `int` | `25` | Frequency (in epochs) for model evaluation |
+| `--lr` | `float` | `1e-3` | Learning rate for the optimizer |
+| `--noise` | `float` | `0.1` | Standard relative deviation of noise added to input data |
+| `--seed` | `int` | `1` | Random seed for reproducibility |
+| `--ratio` | `float` | `1.0` | Ratio controlling data noise in `GraphDataModule` |
+| `--shared_mp` | `flag` | Enabled by default | Use shared weights for message-passing layers (disabled if flag is included) |
+| `--dataset_dir` | `str` | `data/Jaca-SummerSchool25_waves/dataset` | Path to dataset directory |
+| `--run_name` | `str` | `"test"` | Unique name for the training run |
+| `--model` | `str` | `"gnn"` | Model type (`gnn` or `poisson`) |
+| `--plots_flag` | `flag` | Enabled by default | Enable plotting of results (disabled if flag is included) |
+| `--plot_worst` | `flag` | `False` | If set, plots the worst validation examples |
+| `--project` | `str` | `"Jaca-SummerSchool25-GNNs"` | Project name for wandb logging |
+
+> ⚠️ Boolean flags work as toggles. For example, to **disable** `--shared_mp`, simply include the flag in your command:
+> ```bash
+> --shared_mp
+> ```
 
 ---
 
-## 🧠 Models
+## 🧪 Model Evaluation
 
-
-### MeshGraphNet
-Designed for **realistic dynamic simulations**, like elastic plate collisions. Uses spatial message passing on mesh graphs.
+The script will:
+1. Train the model
+2. Save the top 3 checkpoints
+3. Load the best model (`topk1.pth`) after training
+4. Evaluate it on the test set
 
 ---
 
-## 📊 Logging & Visualization
+## 📊 Experiment Tracking with Weights & Biases
 
-We use **Weights & Biases (W&B)** for experiment tracking.
-
-Log in or sign up:
+Make sure you are logged into wandb before running the script:
 
 ```bash
 wandb login
 ```
 
-All metrics, checkpoints, and plots are logged under the given `--project` and `--run_name`.
+Logs, metrics, and model summaries will be uploaded to your wandb dashboard under the specified `--project` name.
 
 ---
 
-## 📈 Example Results
+## 📁 Project Structure
 
+```
+src/
+├── dataloader/
+│   └── datamodule.py
+├── model/
+│   ├── model.py
+│   └── callbacks.py
+└── utils/
+    └── utils.py
+```
+---
 
+## 🙋‍♂️ Need Help?
 
+If you have any issues or questions during the workshop, feel free to open an issue or ask one of the instructors.
+
+Happy simulating! 🎉
