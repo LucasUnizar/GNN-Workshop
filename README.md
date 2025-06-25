@@ -8,10 +8,19 @@ This project provides a training and evaluation pipeline for a Graph Neural Netw
 
 ### Prerequisites
 
-Make sure you have Python 3.8+ and the following Python packages installed:
+Make sure you have Python 3.9+ and the following Python packages installed:
 
 ```bash
-pip install torch pytorch-lightning wandb matplotlib
+# Clone the repository
+git clone https://github.com/LucasUnizar/GNN-Workshop
+cd GNN-Workshop
+
+# Create a dedicated conda environment (highly recommended for dependency management)
+conda create -n gnn python=3.11
+conda activate gnn
+
+# Install the required Python packages
+pip install -r requirements.txt
 ```
 
 ---
