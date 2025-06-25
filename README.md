@@ -40,7 +40,7 @@ python train.py --dataset_dir data/Jaca-SummerSchool25_Elliptic_HighRes/dataset 
 ### Trajectory example:
 
 <div align="center">
-<img src="/material/ex.png" width="250">
+<img src="/material/ex.png" width="450">
 </div>
 
 You can start also the Hyperbolic problem training by running:
@@ -52,7 +52,7 @@ python train.py --dataset_dir data/Jaca-SummerSchool25_waves/dataset --model gnn
 ### Trajectory example:
 
 <div align="center">
-<img src="/material/allframes.png" width="250">
+<img src="/material/allframes.png" width="450">
 </div>
 
 ---
