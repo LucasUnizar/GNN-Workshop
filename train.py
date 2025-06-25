@@ -49,11 +49,13 @@ if __name__ == '__main__':
     if args.model == 'gnn':
         simulator = SimulatorGNN(args, mp_steps=args.mp_steps, input_size=2, output_size=1, hidden=args.hidden,
                                 layers=args.layers, shared_mp=args.shared_mp, epochs=args.epochs, lr=args.lr, device=device, noise=args.noise)
+        print(f"Using N-steps GNN model with {args.mp_steps} message-passing steps")s
         monitor='valid_n_step_rollout_rmse'
 
     elif args.model == 'poisson':
         simulator = SimulatorGNN(args, mp_steps=args.mp_steps, input_size=2, output_size=1, hidden=args.hidden,
                                 layers=args.layers, shared_mp=args.shared_mp, epochs=args.epochs, lr=args.lr, device=device, noise=args.noise)
+        print(f"Using 1-Step GNN model with {args.mp_steps} message-passing steps")
         monitor='valid_n_step_rollout_rmse'
 
     # Callbacks
