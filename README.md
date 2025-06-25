@@ -36,11 +36,24 @@ You can start the Poisson problem training by running:
 ```bash
 python train.py --dataset_dir data/Jaca-SummerSchool25_Elliptic_HighRes/dataset --model poisson 
 ```
+
+### Trajectory example:
+
+<div align="center">
+<img src="/material/ex.png" width="250">
+</div>
+
 You can start also the Hyperbolic problem training by running:
 
 ```bash
 python train.py --dataset_dir data/Jaca-SummerSchool25_waves/dataset --model gnn
 ```
+
+### Trajectory example:
+
+<div align="center">
+<img src="/material/allframes.png" width="250">
+</div>
 
 ---
 
