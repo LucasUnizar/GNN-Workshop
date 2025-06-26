@@ -9,7 +9,6 @@ import scipy.io as sio
 import json
 import torch
 import matplotlib
-matplotlib.use('Agg') 
 
 def plot_3D_scatter(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Liver_actuator', with_wandb=True):
     """

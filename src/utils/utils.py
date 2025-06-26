@@ -8,7 +8,6 @@ from scipy.io import savemat
 import os
 import numpy as np
 
-
 class NodeTypeDP(enum.IntEnum):
     NORMAL = 0
     WALL_BOUNDARY = 1
