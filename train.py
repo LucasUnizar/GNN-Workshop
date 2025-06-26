@@ -14,7 +14,7 @@ from src.utils.utils import set_run_directory, set_constants
 
 import argparse
 
-matplotlib.use('Agg')
+#matplotlib.use('Agg')
 torch.set_float32_matmul_precision('medium')
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -41,11 +41,6 @@ if __name__ == '__main__':
 
     # Data preparatio
     data_module = GraphDataModule(dataset_dir=args.dataset_dir, batch_size=args.batch_size, ratio=args.ratio, dataset_type=args.model)
-    # Setup the data module (this loads the datasets)
-    data_module.setup(stage='fit')
-
-    # Visualize a single sample from the training set
-    data_module.plot_first_and_last_rollout(file_index=0, stage='valid')
     
     # Set seed
     pl.seed_everything(args.seed, workers=True)

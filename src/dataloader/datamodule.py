@@ -1,6 +1,6 @@
 from torch_geometric.loader import DataLoader
 from pytorch_lightning import LightningDataModule
-from src.dataloader.dataset import  MPNN_GraphDataset, Poisson_GraphDataset
+from src.dataloader.dataset import MPNN_GraphDataset, Poisson_GraphDataset
 from pathlib import Path
 
 
@@ -65,17 +65,63 @@ class GraphDataModule(LightningDataModule):
             shuffle=False
         )
 
-    def plot_first_and_last_rollout(self, file_index=0, stage='valid'):
+    def plot_first_and_last_rollout(self, traj_index=0, stage='valid', frame=None):
         """Plot the first and last data of a rollout sequence."""
         if stage == 'valid':
             if hasattr(self, 'valid_rollout_dataset'):
-                self.valid_rollout_dataset.plot_first_and_last(file_index)
+                self.valid_rollout_dataset.plot_first_and_last(traj_index, frame=frame)
             else:
                 print("Rollout dataset not initialized. Run setup('fit') first.")
         elif stage == 'test':
             if hasattr(self, 'test_dataset'):
-                self.test_dataset.plot_first_and_last(file_index)
+                self.test_dataset.plot_first_and_last(traj_index, frame=frame)
             else:
                 print("Test dataset not initialized. Run setup('test') first.")
         else:
             raise ValueError("Stage must be 'valid' or 'test'")
+
+    def plot_node_connectivity(self, traj_index=0, node_index=0, stage='train'):
+        """
+        Plot the connectivity of a specific node in a graph from the dataset.
+        
+        Args:
+            idx (int): Index of the graph in the dataset
+            node_index (int): Index of the node to highlight
+            stage (str): Which dataset to use ('train', 'valid', or 'test')
+        """
+        dataset = None
+        if stage == 'train':
+            if hasattr(self, 'train_dataset'):
+                dataset = self.train_dataset
+            else:
+                print("Train dataset not initialized. Run setup('fit') first.")
+                return
+        elif stage == 'valid':
+            if hasattr(self, 'val_dataset'):
+                dataset = self.val_dataset
+            else:
+                print("Validation dataset not initialized. Run setup('fit') first.")
+                return
+        elif stage == 'test':
+            if hasattr(self, 'test_dataset'):
+                dataset = self.test_dataset
+            else:
+                print("Test dataset not initialized. Run setup('test') first.")
+                return
+        else:
+            raise ValueError("Stage must be 'train', 'valid', or 'test'")
+
+        if dataset is not None:
+            # Check if the dataset is in rollout mode (which doesn't support this method)
+            if hasattr(dataset, 'rollout') and dataset.rollout:
+                print("This method is not available for rollout datasets.")
+                return
+            
+            if traj_index >= len(dataset):
+                print(f"Invalid index {traj_index}. Dataset has {len(dataset)} graphs.")
+                return
+            
+            if hasattr(dataset, 'plot_node_connectivity'):
+                dataset.plot_node_connectivity(idx=traj_index, node_index=node_index)
+            else:
+                print(f"The {self.dataset_type} dataset doesn't support node connectivity visualization.")
