@@ -43,7 +43,7 @@ python train.py --dataset_dir data/Jaca-SummerSchool25_Elliptic_HighRes/dataset 
 <img src="/material/ex.png" width="450">
 </div>
 
-You can start also the 10-Step **Hyperbolic problem** training by running:
+You can start also the n-Step **Hyperbolic problem** training by running:
 
 ```bash
 python train.py --dataset_dir data/Jaca-SummerSchool25_waves/dataset --model gnn
