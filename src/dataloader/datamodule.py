@@ -80,7 +80,7 @@ class GraphDataModule(LightningDataModule):
         else:
             raise ValueError("Stage must be 'valid' or 'test'")
 
-    def plot_node_connectivity(self, traj_index=0, node_index=0, stage='train'):
+    def plot_node_connectivity(self, traj_index=0, node_index=0, stage='valid'):
         """
         Plot the connectivity of a specific node in a graph from the dataset.
         
