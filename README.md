@@ -61,7 +61,7 @@ python train.py --dataset_dir data/Jaca-SummerSchool25_waves/dataset --model gnn
 
 | Argument | Type | Default | Description |
 |----------|------|---------|-------------|
-| `--batch_size` | `int` | `64` | Number of samples per training batch |
+| `--batch_size` | `int` | `64` | Samples per training batch |
 | `--epochs` | `int` | `500` | Total number of training epochs |
 | `--mp_steps` | `int` | `6` | Number of message-passing steps in the GNN |
 | `--layers` | `int` | `2` | Number of GNN layers |
