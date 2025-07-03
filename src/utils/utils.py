@@ -16,7 +16,7 @@ class NodeTypeDP(enum.IntEnum):
 def set_constants(args):
     args.ratio = 1.0
     args.shared_mp = False
-    args.noise = 0.0
+    args.noise = 0.0001
 
     # Set the run name based on the model and parameters
     args.plots_flag = True

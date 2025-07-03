@@ -15,7 +15,7 @@ import argparse
 
 
 class SimulatorGNN(pl.LightningModule):
-    def __init__(self, args=None, mp_steps=15, input_size=1, output_size=1, hidden=128,
+    def __init__(self, args=None, mp_steps=15, input_size=2, output_size=1, hidden=128,
                  layers=2, model_dir='checkpoint/simulator.pth', pretrain=None,
                  transforms=None, shared_mp=False, epochs=1, lr=1e-4, noise=0.0, device='cpu',
                  optim_flag='cosine_annealing', mssg_flag=False):
@@ -32,7 +32,6 @@ class SimulatorGNN(pl.LightningModule):
 
             # reset variables
             mp_steps, layers, hidden, shared_mp = args.mp_steps, args.layers, args.hidden, args.shared_mp
-            input_size, output_size = args.input_size, args.output_size
             
 
         

@@ -1,0 +1,19 @@
+{
+    "batch_size": 64,
+    "epochs": 100,
+    "mp_steps": 10,
+    "layers": 2,
+    "hidden": 16,
+    "eval_freq": 25,
+    "lr": 0.001,
+    "seed": 1,
+    "dataset_dir": "data/Jaca-SummerSchool25_waves/dataset",
+    "run_name": "test",
+    "model": "gnn",
+    "project": "Jaca-SummerSchool25-GNNs",
+    "ratio": 1.0,
+    "shared_mp": false,
+    "noise": 0.0001,
+    "plots_flag": true,
+    "plot_worst": false
+}

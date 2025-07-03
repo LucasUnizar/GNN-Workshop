@@ -29,7 +29,6 @@ def plot_3D_scatter(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Liver_act
     T = z_net.shape[0]  # Number of snapshots
 
     # Ensure save directory exists
-    # Save as gif
     save_path_mats = save_dir + '/mats/'
     os.makedirs(os.path.dirname(save_path_mats), exist_ok=True)
 
@@ -48,17 +47,40 @@ def plot_3D_scatter(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Liver_act
     fig = plt.figure(figsize=(14, 8))
     ax1 = fig.add_subplot(1, 2, 1, projection='3d')
     ax2 = fig.add_subplot(1, 2, 2, projection='3d')
+    
+    # Set titles and labels
     ax1.set_title('GNN Prediction', fontsize=18, fontfamily='serif')
     ax1.set_xlabel('X'), ax1.set_ylabel('Y'), ax1.set_zlabel('Z')
     ax2.set_title('Ground Truth', fontsize=18, fontfamily='serif')
     ax2.set_xlabel('X'), ax2.set_ylabel('Y'), ax2.set_zlabel('Z')
 
-    # Adjust ranges
+    # Calculate ranges
     tensor_max = max(z_gt.max(), z_net.max())
     tensor_min = min(z_gt.min(), z_net.min())
     z_min, z_max = tensor_min.item(), tensor_max.item()
+    
+    # Get X and Y ranges for proper scaling
+    x_range = (X.min().item(), X.max().item())
+    y_range = (Y.min().item(), Y.max().item())
+    
+    # Calculate aspect ratio based on data ranges
+    x_size = x_range[1] - x_range[0]
+    y_size = y_range[1] - y_range[0]
+    z_size = z_max - z_min
+    
+    # Set the plot box aspect ratio to match data proportions
+    ax1.set_box_aspect([x_size, y_size, z_size])
+    ax2.set_box_aspect([x_size, y_size, z_size])
+    
+    # Set z-limits
     ax1.set_zlim(z_min, z_max)
     ax2.set_zlim(z_min, z_max)
+    
+    # Set x and y limits
+    ax1.set_xlim(x_range[0], x_range[1])
+    ax1.set_ylim(y_range[0], y_range[1])
+    ax2.set_xlim(x_range[0], x_range[1])
+    ax2.set_ylim(y_range[0], y_range[1])
 
     # Initial snapshot
     var_net0, var_gt0 = z_net[0].flatten(), z_gt[0].flatten()
@@ -75,12 +97,22 @@ def plot_3D_scatter(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Liver_act
     def animate(snap):
         ax1.clear()
         ax2.clear()
-        ax1.set_zlim(z_min, z_max)
-        ax2.set_zlim(z_min, z_max)
+        
+        # Reapply all settings for each frame
         ax1.set_title('GNN Prediction', fontsize=18, fontfamily='serif')
         ax1.set_xlabel('X'), ax1.set_ylabel('Y'), ax1.set_zlabel('Z')
         ax2.set_title('Ground Truth', fontsize=18, fontfamily='serif')
         ax2.set_xlabel('X'), ax2.set_ylabel('Y'), ax2.set_zlabel('Z')
+        
+        # Reapply aspect ratio and limits
+        ax1.set_box_aspect([x_size, y_size, z_size])
+        ax2.set_box_aspect([x_size, y_size, z_size])
+        ax1.set_zlim(z_min, z_max)
+        ax2.set_zlim(z_min, z_max)
+        ax1.set_xlim(x_range[0], x_range[1])
+        ax1.set_ylim(y_range[0], y_range[1])
+        ax2.set_xlim(x_range[0], x_range[1])
+        ax2.set_ylim(y_range[0], y_range[1])
 
         var_net, var_gt = z_net[snap].flatten(), z_gt[snap].flatten()
         sc1 = ax1.scatter(X, Y, var_net, c=var_net, cmap='plasma', vmax=z_max, vmin=z_min)
@@ -253,7 +285,8 @@ def plot_error(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Error_plot'):
 
 def plot_combined(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Combined_plot', with_wandb=True):
     """
-    This function overlays GNN predictions and ground truth in a single plot for comparison.
+    This function overlays GNN predictions and ground truth in a single plot for comparison,
+    with proper axis scaling to maintain true proportions between axes.
 
     Parameters:
     z_net (torch.Tensor): Predictions from the GNN.
@@ -272,17 +305,40 @@ def plot_combined(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Combined_pl
     ax = fig.add_subplot(1, 1, 1, projection='3d')
     ax.set_title('Prediction vs Ground Truth', fontsize=18, fontfamily='serif')
     ax.set_xlabel('X'), ax.set_ylabel('Y'), ax.set_zlabel('Z')
+    
+    # Calculate ranges
     tensor_max = max(z_gt.max(), z_net.max())
     tensor_min = min(z_gt.min(), z_net.min())
     z_min, z_max = tensor_min.item(), tensor_max.item()
+    
+    # Get X and Y ranges for proper scaling
+    x_range = (X.min().item(), X.max().item())
+    y_range = (Y.min().item(), Y.max().item())
+    
+    # Calculate aspect ratio based on data ranges
+    x_size = x_range[1] - x_range[0]
+    y_size = y_range[1] - y_range[0]
+    z_size = z_max - z_min
+    
+    # Set the plot box aspect ratio to match data proportions
+    ax.set_box_aspect([x_size, y_size, z_size])
+    
+    # Set axis limits
     ax.set_zlim(z_min, z_max)
+    ax.set_xlim(x_range[0], x_range[1])
+    ax.set_ylim(y_range[0], y_range[1])
 
     # Animation
     def animate(snap):
         ax.clear()
         ax.set_title('Prediction vs Ground Truth', fontsize=18, fontfamily='serif')
         ax.set_xlabel('X'), ax.set_ylabel('Y'), ax.set_zlabel('Z')
+        
+        # Reapply aspect ratio and limits for each frame
+        ax.set_box_aspect([x_size, y_size, z_size])
         ax.set_zlim(z_min, z_max)
+        ax.set_xlim(x_range[0], x_range[1])
+        ax.set_ylim(y_range[0], y_range[1])
 
         var_net = z_net[snap].flatten()
         var_gt = z_gt[snap].flatten()
