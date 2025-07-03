@@ -83,7 +83,7 @@ def plot_3D_scatter(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Liver_act
     ax2.set_ylim(y_range[0], y_range[1])
 
     # Initial snapshot
-    var_net0, var_gt0 = z_net[0].flatten(), z_gt[0].flatten()
+    var_net0, var_gt0 = z_net[0].flatten().unsqueeze(1), z_gt[0].flatten().unsqueeze(1)
     sc1 = ax1.scatter(X, Y, var_net0, c=var_net0, cmap='plasma', vmax=z_max, vmin=z_min)
     sc2 = ax2.scatter(X, Y, var_gt0, c=var_gt0, cmap='plasma', vmax=z_max, vmin=z_min)
 
@@ -114,7 +114,7 @@ def plot_3D_scatter(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Liver_act
         ax2.set_xlim(x_range[0], x_range[1])
         ax2.set_ylim(y_range[0], y_range[1])
 
-        var_net, var_gt = z_net[snap].flatten(), z_gt[snap].flatten()
+        var_net, var_gt = z_net[snap].flatten().unsqueeze(1), z_gt[snap].flatten().unsqueeze(1)
         sc1 = ax1.scatter(X, Y, var_net, c=var_net, cmap='plasma', vmax=z_max, vmin=z_min)
         sc2 = ax2.scatter(X, Y, var_gt, c=var_gt, cmap='plasma', vmax=z_max, vmin=z_min)
 
@@ -340,8 +340,8 @@ def plot_combined(z_net, z_gt, X, Y, save_dir='outputs/gifs/', name='Combined_pl
         ax.set_xlim(x_range[0], x_range[1])
         ax.set_ylim(y_range[0], y_range[1])
 
-        var_net = z_net[snap].flatten()
-        var_gt = z_gt[snap].flatten()
+        var_net = z_net[snap].flatten().unsqueeze(1)
+        var_gt = z_gt[snap].flatten().unsqueeze(1)
 
         sc_net = ax.scatter(X, Y, var_net, c='blue', label='Prediction', alpha=0.6)
         sc_gt = ax.scatter(X, Y, var_gt, c='red', label='Ground Truth', alpha=0.6)
