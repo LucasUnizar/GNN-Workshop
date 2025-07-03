@@ -2,9 +2,9 @@ torch
 torchvision
 torchaudio
 pytorch-lightning
-numpy
+numpy==2.0.1
 torch_geometric
-matplotlib
+matplotlib==3.10.0
 scipy
 tqdm
 wandb
